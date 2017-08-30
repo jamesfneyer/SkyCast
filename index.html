@@ -2,30 +2,89 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="style.css" rel="stylesheet"></style>
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
 <script src="Chart.js"></script>
 <script type="text/javascript" src="script.js"></script>
-<title>Insert title here</title>
+<title>SkyCast</title>
 </head>
 <body>
-
+	<div class="jumbotron text-center">
+        <h1>Welcome to SkyCast</h1>
+		<h4>When you want all your possible weather information.</h4>
+	</div>
 	<section id="fetch">
-      <input type="text" placeholder="Enter a location" id="term" />
-      <button id="search">Find my locations weather information.</button>
-   </section>
-   <section id="weather">
-   </section>
-	<section id="chart">
-	<canvas id="myChart" width="50" height="25"></canvas>
-	</section>
-	<section id="fetch">
-      <button id="history">Previous Search Locations.</button>
+	<div class="container">
+		<div class="row">
+               <div class="col-lg-12 text-center">
+					<input type="text" placeholder="Enter a location" id="term" />
+					<br>
+					<br>
+					<button id="search">Find my locations weather information.</button>
+				</div>
+		</div>
+	</div>
    </section>
    
-   <section id="prevLoc">
-	</section>
-	
-   <h4><a href="https://darksky.net/poweredby/">Powered By Dark Sky</a></h4>
-   
+   <div class="container">
+		<div class="row">
+              <div class="col-lg-12">
+				<section id="weather">
+				</section>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<section id="chart">
+					<canvas id="myChart" width="50" height="25"></canvas>
+				</section>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<section id="chart2">
+					<canvas id="myYearChart" width="50" height="25"></canvas>
+				</section>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<section id="fetch">
+					<button id="history">Previous Search Locations.</button>
+				</section>
+			</div>
+		</div>
+	</div>
+	<br>
+   <div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+			   <section id="prevLoc">
+				</section>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h4><a href="https://darksky.net/poweredby/">Powered By Dark Sky</a></h4>
+			</div>
+		</div>
+	</div>
+	</div>
 </body>
 </html>
