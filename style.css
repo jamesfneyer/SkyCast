@@ -38,3 +38,8 @@ button, input{
 a{
 	color: #003366;
 }
+caption{
+	color: white;
+	text-align: center;
+	border: 1px solid white;
+}

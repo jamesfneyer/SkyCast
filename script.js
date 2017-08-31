@@ -4,7 +4,7 @@
 $(document).ready(function(){
 	var getLocation = function(){
 		var day = new Date();
-		var year = new Array(10);
+		var year = new Array(15);
 		var weekday = new Array(14);
 			weekday[0] =  "Sunday";
 			weekday[1] = "Monday";
@@ -33,18 +33,52 @@ $(document).ready(function(){
 		prevLocs.push(locat);
 		localStorage.setItem("previousLocations",JSON.stringify(prevLocs));
 		}
-		$.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+locat+"&key=AIzaSyAeW0g8upAj9bQDvzgjUgjak8V1Ib_IClA",function(maps){
+		$.ajax({
+			url: "https://maps.googleapis.com/maps/api/geocode/json?address="+locat+"&key=AIzaSyAeW0g8upAj9bQDvzgjUgjak8V1Ib_IClA",
+			dataType: "json",
+			cache: true
+		}).done(function(maps){
 			if(maps != 'Nothing found.'){
 				console.log(maps);
 				var latitude = maps.results[0].geometry.location.lat;
 				var longitude = maps.results[0].geometry.location.lng;
 				$.ajax({
 					  dataType: "jsonp",
+					  type: "GET",
+					  cache: true,
 					  url: "https://api.darksky.net/forecast/3d319c74f6ad25c2f4255d959d7a8ef3/"+latitude+","+longitude
 					  }).done(function ( wr ) {
 						year[0] = wr.daily.data[0].apparentTemperatureMin;
 						year[5] = wr.daily.data[0].apparentTemperatureMax;
-					  console.log(wr);
+						year[10] = wr.currently.apparentTemperature;
+						console.log(wr);
+						console.log(day.getTime());
+						var weatherCurrent = '<br />\
+						<br \> \
+							<div class="weatherTable" border=5> \
+							<table class="myTable">\
+							<caption>Today\'s Information</caption>\
+							<thead>\
+							<tr>\
+								<th>Day</th>\
+								<th>Summary</th>\
+								<th>Apparent Temperature</th>\
+								<th>Percent chance of Percipitation</th>\
+								<th>Visibility</th>\
+							</tr>\
+							<thead>\
+							<tr>\
+								<td>'+weekday[day.getDay()]+'</td>\
+								<td class="s">'+wr.currently.summary+'</td>\
+								<td class="n">'+wr.currently.apparentTemperature+'</td>\
+								<td class="n">'+wr.currently.precipProbability+'</td>\
+								<td class="n">'+wr.currently.visibility+'</td>\
+							<tr>\
+							</tr>\
+							</table>\
+							</div>\
+							<br \> \
+						';
 						var weather = '<br \> \
 							<br \> \
 							<div class="weatherTable" border=5> \
@@ -55,7 +89,6 @@ $(document).ready(function(){
 								<th>Min temp</th>\
 								<th>Max temp</th>\
 								<th>Summary</th>\
-								<th>Currently</th>\
 							</tr>\
 							<thead>\
 							<tr>\
@@ -63,7 +96,6 @@ $(document).ready(function(){
 								<td class="n">'+wr.daily.data[0].apparentTemperatureMin+'</td>\
 								<td class="n">'+wr.daily.data[0].apparentTemperatureMax+'</td>\
 								<td class="s">'+wr.daily.data[0].summary+'</td>\
-								<td class="n">'+wr.currently.apparentTemperature+'</td>\
 							<tr>\
 							</tr>\
 								<td>'+weekday[day.getDay()+1]+'</td>\
@@ -83,6 +115,7 @@ $(document).ready(function(){
 							<br \> \
 							';
 						$('#weather').html(weather);
+						$('#weatherCurrent').html(weatherCurrent);
 						var img = 'clear';
 						switch(wr.currently.summary){
 							case 'Raining':
@@ -209,35 +242,48 @@ $(document).ready(function(){
 					console.log(day.getTime());
 					$.ajax({
 					  dataType: "jsonp",
-					  url: "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/3d319c74f6ad25c2f4255d959d7a8ef3/"+latitude+","+longitude+","+day.getTime()
+					  type: "GET",
+					  cache: true,
+					  url: "https://api.darksky.net/forecast/3d319c74f6ad25c2f4255d959d7a8ef3/"+latitude+","+longitude+","+Math.floor(day.getTime()/1000)
 					  }).done(function ( wr2 ) {
-						  year[2]= wr2.daily.data.apparentTemperatureMin;
-						  year[7]= wr2.daily.data.apparentTemperatureMax;
+						  console.log(wr2);
+						  year[1]= wr2.daily.data[0].apparentTemperatureMin;
+						  year[6]= wr2.daily.data[0].apparentTemperatureMax;
+						  year[11]= wr2.currently.apparentTemperature;
 						  day.setFullYear( day.getFullYear() - 1 );
 							$.ajax({
 							  dataType: "jsonp",
-							  url: "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/3d319c74f6ad25c2f4255d959d7a8ef3/"+latitude+","+longitude+","+day.getTime()
+							  cache: true,
+							  type: "GET",
+							  url: "https://api.darksky.net/forecast/3d319c74f6ad25c2f4255d959d7a8ef3/"+latitude+","+longitude+","+Math.floor(day.getTime()/1000)
 							  }).done(function ( wr3 ) {
-								  year[3]= wr3.daily.data.apparentTemperatureMin;
-								  year[8]= wr3.daily.data.apparentTemperatureMax;
+								  year[2]= wr3.daily.data[0].apparentTemperatureMin;
+								  year[7]= wr3.daily.data[0].apparentTemperatureMax;
+								  year[12]= wr3.currently.apparentTemperature;
 								  day.setFullYear( day.getFullYear() - 1 );
 									$.ajax({
 									  dataType: "jsonp",
-									  url: "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/3d319c74f6ad25c2f4255d959d7a8ef3/"+latitude+","+longitude+","+day.getTime()
+									  cache: true,
+									  type: "GET",
+									  url: "https://api.darksky.net/forecast/3d319c74f6ad25c2f4255d959d7a8ef3/"+latitude+","+longitude+","+Math.floor(day.getTime()/1000)
 									  }).done(function ( wr4 ) {
-										  year[4]= wr4.daily.data.apparentTemperatureMin;
-										  year[9]= wr4.daily.data.apparentTemperatureMax;
+										  year[3]= wr4.daily.data[0].apparentTemperatureMin;
+										  year[8]= wr4.daily.data[0].apparentTemperatureMax;
+										  year[13]= wr4.currently.apparentTemperature;
 										  day.setFullYear( day.getFullYear() - 1 );
 											$.ajax({
 											  dataType: "jsonp",
-											  url: "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/3d319c74f6ad25c2f4255d959d7a8ef3/"+latitude+","+longitude+","+day.getTime()
+											  cache: true,
+											  type: "GET",
+											  url: "https://api.darksky.net/forecast/3d319c74f6ad25c2f4255d959d7a8ef3/"+latitude+","+longitude+","+Math.floor(day.getTime()/1000)
 											  }).done(function ( wr5 ) {
-												  year[1]= wr5.daily.data.apparentTemperatureMin;
-												  year[6]= wr5.daily.data.apparentTemperatureMax;
+												  year[4]= wr5.daily.data[0].apparentTemperatureMin;
+												  year[9]= wr5.daily.data[0].apparentTemperatureMax;
+												  year[14] = wr5.currently.apparentTemperature;
 												  var config2 = {
 							type: 'line',
 							data: {
-								labels:[day.getYear()-5,day.getYear()-4,day.getYear()-3,day.getYear()-2,day.getYear()-1,day.getYear()],
+								labels:[day.getYear(),day.getYear()+1,day.getYear()+2,day.getYear()+3,day.getYear()+4],
 								datasets: [{
 									label: 'Apparent Min Temp',
 									fill: false,
@@ -263,6 +309,20 @@ $(document).ready(function(){
 										year[7],
 										year[6],
 										year[5]
+									],
+								},
+									{
+									label: "Current Temp",
+									fontColor: "white",
+									fill: false,
+									backgroundColor: "rgb(255, 255, 0)",
+									borderColor: "rgb(255, 255, 0)",
+									data: [
+										year[14],
+										year[13],
+										year[12],
+										year[11],
+										year[10]
 									],
 								}]
 							},
