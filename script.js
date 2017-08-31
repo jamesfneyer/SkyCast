@@ -79,7 +79,7 @@ $(document).ready(function(){
 								<td>'+week[0]+'</td>\
 								<td class="s">'+wr.currently.summary+'</td>\
 								<td class="n">'+wr.currently.apparentTemperature+'</td>\
-								<td class="n">'+wr.currently.precipProbability+'</td>\
+								<td class="n">'+Math.round(wr.currently.precipProbability*100)+'%</td>\
 								<td class="n">'+wr.currently.visibility+'</td>\
 							<tr>\
 							</tr>\
