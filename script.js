@@ -4,6 +4,7 @@
 $(document).ready(function(){
 	var getLocation = function(){
 		var day = new Date();
+		console.log(day.getDay());
 		var year = new Array(15);
 		var weekday = new Array(14);
 			weekday[0] =  "Sunday";
@@ -20,7 +21,14 @@ $(document).ready(function(){
 			weekday[11] = "Thursday";
 			weekday[12] = "Friday";
 			weekday[13] = "Saturday";
-		
+		var week = new Array(7);
+			week[0] = weekday[day.getDay()];
+			week[1] = weekday[day.getDay()+1];
+			week[2] = weekday[day.getDay()+2];
+			week[3] = weekday[day.getDay()+3];
+			week[4] = weekday[day.getDay()+4];
+			week[5] = weekday[day.getDay()+5];
+			week[6] = weekday[day.getDay()+6];
 		var locat = $('#term').val();
 		if (locat == ''){
 			$('#weather').html("<h2 class='loading'>Please enter a valid location.</h2>");
@@ -68,7 +76,7 @@ $(document).ready(function(){
 							</tr>\
 							<thead>\
 							<tr>\
-								<td>'+weekday[day.getDay()]+'</td>\
+								<td>'+week[0]+'</td>\
 								<td class="s">'+wr.currently.summary+'</td>\
 								<td class="n">'+wr.currently.apparentTemperature+'</td>\
 								<td class="n">'+wr.currently.precipProbability+'</td>\
@@ -98,13 +106,13 @@ $(document).ready(function(){
 								<td class="s">'+wr.daily.data[0].summary+'</td>\
 							<tr>\
 							</tr>\
-								<td>'+weekday[day.getDay()+1]+'</td>\
+								<td>'+week[1]+'</td>\
 								<td class="n">'+wr.daily.data[1].apparentTemperatureMin+'</td>\
 								<td class="n">'+wr.daily.data[1].apparentTemperatureMax+'</td>\
 								<td class="s">'+wr.daily.data[1].summary+'</td>\
 							<tr>\
 							</tr>\
-								<td>'+weekday[day.getDay()+2]+'</td>\
+								<td>'+week[2]+'</td>\
 								<td class="n">'+wr.daily.data[2].apparentTemperatureMin+'</td>\
 								<td class="n">'+wr.daily.data[2].apparentTemperatureMax+'</td>\
 								<td class="s">'+wr.daily.data[2].summary+'</td>\
@@ -147,7 +155,7 @@ $(document).ready(function(){
 						var config = {
 							type: 'line',
 							data: {
-								labels:[weekday[day.getDay()],weekday[day.getDay()+1],weekday[day.getDay()+2],weekday[day.getDay()+3],weekday[day.getDay()+4],weekday[day.getDay()+5],weekday[day.getDay()+6]],
+								labels:[week[0],week[1],week[2],week[3],week[4],week[5],week[6]],
 								datasets: [{
 									label: 'Apparent Min Temp',
 									fill: false,
@@ -283,10 +291,11 @@ $(document).ready(function(){
 												  var config2 = {
 							type: 'line',
 							data: {
-								labels:[day.getYear(),day.getYear()+1,day.getYear()+2,day.getYear()+3,day.getYear()+4],
+								labels:[day.getYear()+1900,day.getYear()+1901,day.getYear()+1902,day.getYear()+1903,day.getYear()+1904],
 								datasets: [{
 									label: 'Apparent Min Temp',
 									fill: false,
+									fontColor: 'white',
 									backgroundColor: "rgb(54, 162, 235)",
 									borderColor: "rgb(54, 162, 235)",
 									data: [
@@ -354,7 +363,7 @@ $(document).ready(function(){
 										display: true,
 										gridLines: {
 										  display: true ,
-										  color: "#FFFFFF"
+										  color: "white"
 										},
 										scaleLabel: {
 											display: true,
