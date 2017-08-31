@@ -3,16 +3,16 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="style.css" rel="stylesheet"></style>
+<!--link href="style.css" rel="stylesheet"></style-->
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
+<link rel="stylesheet/less" type="text/css" href="style.less" /> <script src="less.js"></script>
 <script src="Chart.js"></script>
 <script type="text/javascript" src="script.js"></script>
 <title>SkyCast</title>
 </head>
 <body>
 	<div class="jumbotron text-center">
-        <h1>Welcome to SkyCast</h1>
-		<h4>For all your possible weather information.</h4>
+		<img src="../SkyCast/imgs/logo.png">
 	</div>
 	<section id="fetch">
 	<div class="container">
@@ -21,7 +21,7 @@
 					<input type="text" placeholder="Enter a location" id="term" />
 					<br>
 					<br>
-					<button id="search">Find my location's weather information.</button>
+					<button id="search" class="search">Find my location's weather information.</button>
 				</div>
 		</div>
 	</div>
@@ -71,7 +71,7 @@
 		<div class="row">
 			<div class="col-lg-12 text-center">
 				<section id="fetch">
-					<button id="history">Previous Search Locations.</button>
+					<button id="history" class="history">Previous Search Locations.</button>
 				</section>
 			</div>
 		</div>

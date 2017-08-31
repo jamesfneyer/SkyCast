@@ -1,0 +1,75 @@
+@color_1: white;
+@color_2: black;
+@color_3: #003366;
+@import url(https://fonts.googleapis.com/css?family=Fjalla One);
+.button-3D(@color){
+	background: @color;
+	box-shadow: 0px 3px 0px darken(@color, 10%);
+	
+	&:active{
+		box-shadow: 0px 1px 0px darken(@color, 10%);
+	}
+}
+.myTable {
+	width: 100%;
+	text-align: left;
+	vertical-align: middle;
+}
+td {
+	height: 30px;
+	padding: 10px;
+	border: 1px solid white;
+}
+table {
+	border: 1px solid white;
+}
+th {
+	border: 1px solid white;
+	text-align: center;
+}
+td.s {
+	text-align: center;
+}
+td.n {
+	text-align: right;
+}
+.footer {
+	align: center;
+}
+.jumbotron {
+	background: url("../SkyCast/imgs/clear.jpg");
+	background-size: cover;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	color: @color_1;
+}
+body {
+	background-image: url("../SkyCast/imgs/background.jpg");
+	color: @color_1;
+	font-family: 'Fjalla One';
+}
+button {
+	font-family: 'Fjalla One';
+	padding: 10px;
+	text-align: center;
+	cursor: pointer;
+	
+	&.search{
+	.button-3D(#217C7E);
+	}
+	&.history{
+	.button-3D(#9A3334);
+	}
+}
+
+input {
+	color: @color_2;
+}
+a {
+	color: @color_3;
+}
+caption {
+	color: @color_1;
+	text-align: center;
+	border: 1px solid white;
+}
+
